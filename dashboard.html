@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SmartBudget Dashboard</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <header>
+    <h1>SmartBudget Dashboard</h1>
+    <button id="logout-btn">Logout</button>
+  </header>
+
+  <main>
+    <section class="add-expense card">
+      <h2>Add Expense</h2>
+      <form id="expense-form">
+        <input type="date" name="date" required>
+        <input type="text" name="category" placeholder="Category" required>
+        <input type="number" name="amount" placeholder="Amount" required>
+        <input type="text" name="note" placeholder="Note">
+        <button type="submit">Add Expense</button>
+      </form>
+    </section>
+
+    <section class="expenses card">
+      <h2>Expense History</h2>
+      <div id="expense-list"></div>
+      <button id="delete-all">Delete All Expenses</button>
+    </section>
+
+    <section class="chart card">
+      <h2>Expenses Pie Chart</h2>
+      <canvas id="expenseChart"></canvas>
+    </section>
+  </main>
+
+  <script type="module" src="app.js"></script>
+</body>
+</html>

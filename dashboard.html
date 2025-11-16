@@ -8,35 +8,74 @@
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
-  <header>
-    <h1>SmartBudget Dashboard</h1>
-    <button id="logout-btn">Logout</button>
+
+  <header class="glass">
+    <h1><span class="accent">SmartBudget</span> Dashboard</h1>
+
+    <div class="header-right">
+      <button id="theme-toggle" class="theme-toggle small">🌙</button>
+      <button id="logout-btn" class="btn-primary small">Logout</button>
+    </div>
   </header>
 
   <main>
-    <section class="add-expense card">
+
+    <!-- Add Expense -->
+    <section class="card glass">
       <h2>Add Expense</h2>
       <form id="expense-form">
         <input type="date" name="date" required>
         <input type="text" name="category" placeholder="Category" required>
         <input type="number" name="amount" placeholder="Amount" required>
-        <input type="text" name="note" placeholder="Note">
-        <button type="submit">Add Expense</button>
+        <input type="text" name="note" placeholder="Note (optional)">
+        <button type="submit" class="btn-primary">Add Expense</button>
       </form>
     </section>
 
-    <section class="expenses card">
+    <!-- Expense History -->
+    <section class="card glass">
       <h2>Expense History</h2>
       <div id="expense-list"></div>
-      <button id="delete-all">Delete All Expenses</button>
+      <button id="delete-all" class="btn-danger">Delete All Expenses</button>
     </section>
 
-    <section class="chart card">
-      <h2>Expenses Pie Chart</h2>
+    <!-- Chart -->
+    <section class="card glass">
+      <h2>Expenses Breakdown</h2>
       <canvas id="expenseChart"></canvas>
     </section>
+
   </main>
 
   <script type="module" src="app.js"></script>
+
+  <script>
+    /* Theme Toggle */
+    (function () {
+      const key = "smartbudget-theme";
+      const toggle = document.getElementById("theme-toggle");
+      if (!toggle) return;
+
+      function apply() {
+        const saved = localStorage.getItem(key);
+        if (saved === "light") {
+          document.body.classList.add("light-mode");
+          toggle.textContent = "☀️";
+        } else {
+          document.body.classList.remove("light-mode");
+          toggle.textContent = "🌙";
+        }
+      }
+
+      toggle.addEventListener("click", () => {
+        const isLight = document.body.classList.toggle("light-mode");
+        localStorage.setItem(key, isLight ? "light" : "dark");
+        toggle.textContent = isLight ? "☀️" : "🌙";
+      });
+
+      apply();
+    })();
+  </script>
+
 </body>
 </html>
